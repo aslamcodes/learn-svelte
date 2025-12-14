@@ -41,3 +41,25 @@ Vanilla files
   - .html, .css 
 
 - The pages are named as `+page.svelte`, svelte files are with ext `.svelte` but the plus (+) is sveltekit notation.
+
+# The special files (page and layout)
+Sveltekit uses a file-system based router, similar to next.js for react. `src\routes` being the root page `\` of the app.  
+
+These special files are called `route files` [1](https://svelte.dev/docs/kit/routing)  
+
+layout files
+- +layout.svelte and +error.svelte files, define the layout and error page for the directory they live in and as well as subdirectories. However the subdirectories can define their own layout files
+
+page files
+- +page.svelte file defines a page of the route (the directory, they are in)
+- +page.ts - exports a load function, that can be used for loading data for the +page.svelte to use 
+  CSR - runs on the client to load data 
+  SSR - runs on the server to pre-hydrate the rendered file
+- +page.server.ts - only run on the server, you want this NOT to run on client side, for things like fetching data  from database or a backend app
+
+> Other than +page, +layout and +server (not used in this project) files are ignored by sveltekit. Sveltekit recommends commonly used components and modules to be put in `lib` folder, which this project probably not follows, as I can see some svelte components `Counter.svelte` and `Header.svelte`
+
+The app.html is similar as what found in react's index.html with id root, where svelte injects the dynamic setup
+
+# References
+1. [SvelteKit Routing](https://svelte.dev/docs/kit/routing)
