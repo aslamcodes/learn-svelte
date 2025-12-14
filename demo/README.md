@@ -57,7 +57,7 @@ page files
   SSR - runs on the server to pre-hydrate the rendered file
 - +page.server.ts - only run on the server, you want this NOT to run on client side, for things like fetching data  from database or a backend app
 
-> Other than +page, +layout and +server (not used in this project) files are ignored by sveltekit. Sveltekit recommends commonly used components and modules to be put in `lib` folder, which this project probably not follows, as I can see some svelte components `Counter.svelte` and `Header.svelte`
+> Other than +page, +layout and +server (not used in this project) files are ignored by sveltekit. Sveltekit recommends commonly used components and modules to be put in `lib` folder, which this project probably not follows, as I can see some svelte components `Counter.svelte` and `Header.svelte`. I fixed this myself in [e5abc03](https://github.com/aslamcodes/learn-svelte/commit/e5abc0328668745821bde2e7dd65358815138f46)
 
 The app.html is similar as what found in react's index.html with id root, where svelte injects the dynamic setup
 
