@@ -120,6 +120,11 @@ Add dynamic rendering and visual feedback.
 - Learn Svelte's built-in transition system
 - See how `$derived()` can handle complex computations
 
+**Task completion:**
+
+- (The transitions are so satisfying) Implemented builting transistions for initial message and TodoItem
+- commit - [c89225b](https://github.com/aslamcodes/learn-svelte/commit/c89225b0651546093df77e26b53e019edab540a0)
+
 ---
 
 ## **Task 5: Stores & Shared State**
