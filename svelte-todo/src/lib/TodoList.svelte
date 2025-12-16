@@ -7,16 +7,6 @@
     let currTodo = $state("");
     let todoList = $state<Todo[]>([]);
 
-    // when used without derived, the todolist.length will not point to the reactive proxy,
-    // hence any updates to the proxies via the AddTodo function will not update this variable
-    const todoCount = $derived.by(() => {
-        const completed = todoList.filter((t) => t.done).length;
-        return {
-            completed,
-            pending: todoList.length - completed,
-        };
-    });
-
     function addTodo() {
         let todo: Todo = {
             id: crypto.randomUUID(),
@@ -53,5 +43,5 @@
         <TodoItem {todo} {DeleteTodo} {ToggleItem} />
     {/each}
 
-    <Stats completed={todoCount.completed} pending={todoCount.pending} />
+    <Stats {todoList} />
 </div>
