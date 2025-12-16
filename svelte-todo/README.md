@@ -90,6 +90,10 @@ Break the app into reusable components.
 - Practice component composition and separation of concerns
 - Understand unidirectional data flow
 
+**Task completion:**
+
+- Most of the tasks are completed at Tasks 2 as, part of code best practices [965d723](https://github.com/aslamcodes/learn-svelte/commit/965d723dcba505b4a5948eb5562a6570dd40a9d2)
+
 ---
 
 ## **Task 4: Conditional Rendering & Loops**
