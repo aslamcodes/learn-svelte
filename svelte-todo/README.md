@@ -1,47 +1,397 @@
-# Svelte + TS + Vite
+# The Hello World Project
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+Since I've been looking around here and there in svelte, now its time to get my Hands dirty
 
-## Recommended IDE Setup
+# Svelte 5 Todo App - Comprehensive Learning Tasks - By Claude
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+I'll create a series of tasks that will help you build a complete todo app while systematically exploring Svelte 5's core concepts. Each task is designed to introduce specific framework features.
 
-## Need an official Svelte framework?
+## **Task 1: Project Setup & Basic Runes**
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+**Svelte Concepts: `$state`, `$derived`, Basic Reactivity**
 
-## Technical considerations
+Create a basic todo app foundation with reactive state management.
 
-**Why use this over SvelteKit?**
+**Requirements:**
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+- Initialize a Svelte 5 project (use Vite or SvelteKit)
+- Create a `TodoList.svelte` component
+- Use `$state()` rune to manage an array of todos (each todo: `{ id, text, completed }`)
+- Use `$state()` for an input field binding
+- Implement an "Add Todo" function that adds items to the array
+- Use `$derived()` to calculate and display the total number of todos
+- Display the list of todos with basic styling
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+**Learning Goals:**
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+- Understand how `$state()` replaces the old reactive declarations
+- See how Svelte 5's fine-grained reactivity works
+- Learn `$derived()` for computed values
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+---
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+## **Task 2: Event Handling & Two-Way Binding**
 
-**Why include `.vscode/extensions.json`?**
+**Svelte Concepts: Event handlers, `bind:` directive, `$effect()`**
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+Enhance interactivity with proper event handling and effects.
 
-**Why enable `allowJs` in the TS template?**
+**Requirements:**
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+- Add a checkbox to each todo for completion status using `bind:checked`
+- Implement a delete button for each todo
+- Add `bind:value` for the input field
+- Use `$derived()` to calculate completed vs incomplete todo counts
+- Use `$effect()` to log to console whenever the todo list changes
+- Add keyboard support: pressing Enter should add a todo
+- Clear the input field after adding a todo
 
-**Why is HMR not preserving my local component state?**
+**Learning Goals:**
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
+- Master Svelte's binding syntax
+- Understand event modifiers (e.g., `on:click`, `on:keydown`)
+- Learn when and how to use `$effect()` for side effects
+- See the difference between `$derived()` (pure computation) and `$effect()` (side effects)
 
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+---
 
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+## **Task 3: Component Composition & Props**
+
+**Svelte Concepts: Component props, `$props()` rune, Component hierarchy**
+
+Break the app into reusable components.
+
+**Requirements:**
+
+- Create a `TodoItem.svelte` component that receives props using `$props()`
+- Pass todo data, completion status, and callbacks to TodoItem
+- Create a `TodoInput.svelte` component for the input field
+- Use TypeScript types for props (optional but recommended)
+- Implement proper prop destructuring with defaults
+- Create a `Stats.svelte` component to display todo statistics
+
+**Learning Goals:**
+
+- Understand Svelte 5's `$props()` rune vs legacy props
+- Learn component communication patterns
+- Practice component composition and separation of concerns
+- Understand unidirectional data flow
+
+---
+
+## **Task 4: Conditional Rendering & Loops**
+
+**Svelte Concepts: `{#if}`, `{#each}`, `{#key}`, Transitions**
+
+Add dynamic rendering and visual feedback.
+
+**Requirements:**
+
+- Use `{#each}` with proper keying for the todo list
+- Add `{#if}` blocks to show/hide UI based on conditions:
+  - Show "No todos yet" message when list is empty
+  - Show stats only when there are todos
+- Implement filter buttons (All, Active, Completed)
+- Use `$derived()` to compute filtered todo list
+- Add Svelte transitions (`transition:fade`, `transition:slide`) to todos
+- Use `{#key}` block to animate list changes
+
+**Learning Goals:**
+
+- Master Svelte's templating syntax
+- Understand the importance of keying in lists
+- Learn Svelte's built-in transition system
+- See how `$derived()` can handle complex computations
+
+---
+
+## **Task 5: Stores & Shared State**
+
+**Svelte Concepts: Runes-based stores, `$state` in modules, Store patterns**
+
+Implement global state management using Svelte 5 patterns.
+
+**Requirements:**
+
+- Create a `todoStore.svelte.ts` file with exported `$state()`
+- Move todo management logic to the store
+- Create functions: `addTodo()`, `toggleTodo()`, `deleteTodo()`, `clearCompleted()`
+- Import and use the store in multiple components
+- Add a `filterStore` for the current filter setting
+- Demonstrate how changes in one component affect others
+
+**Learning Goals:**
+
+- Understand Svelte 5's approach to shared state (universal reactivity)
+- Learn to create reactive modules with runes
+- Compare with legacy stores (`writable`, `readable`)
+- Practice state management patterns
+
+---
+
+## **Task 6: Snippets & Content Projection**
+
+**Svelte Concepts: `{#snippet}`, render props pattern, Slot alternatives**
+
+Create reusable UI patterns with snippets.
+
+**Requirements:**
+
+- Create a `Card.svelte` wrapper component using snippets
+- Define a snippet for custom todo item rendering
+- Create a `Button.svelte` component that accepts icon snippets
+- Implement a `Modal.svelte` with header, body, and footer snippets
+- Add an "Edit Todo" feature using the modal
+- Use snippets to customize empty state messaging
+
+**Learning Goals:**
+
+- Master Svelte 5's snippet syntax (replaces slots)
+- Understand snippet parameters and render props
+- Learn advanced component composition patterns
+- See how snippets enable more flexible APIs
+
+---
+
+## **Task 7: Actions & Directives**
+
+**Svelte Concepts: `use:` directive, Custom actions, DOM manipulation**
+
+Add custom behaviors with actions.
+
+**Requirements:**
+
+- Create a `clickOutside` action for the modal/dropdowns
+- Implement an `autofocus` action for the input field
+- Create a `longpress` action for todo items (long press to delete)
+- Add a `tooltip` action that shows todo creation date on hover
+- Implement an action that animates new todos with FLIP technique
+- Use action parameters to customize behavior
+
+**Learning Goals:**
+
+- Understand Svelte actions for reusable DOM behaviors
+- Learn the action lifecycle (mount, update, destroy)
+- Practice direct DOM manipulation when needed
+- See how actions encapsulate imperative code
+
+---
+
+## **Task 8: Forms & Validation**
+
+**Svelte Concepts: Form handling, `$state` validation, Error states**
+
+Implement robust form handling with validation.
+
+**Requirements:**
+
+- Add validation: todos must be at least 3 characters
+- Show error messages using `$derived()` for validation state
+- Prevent adding empty or invalid todos
+- Add an edit mode for existing todos with a form
+- Implement "Cancel" functionality that reverts changes
+- Use `bind:group` for filter radio buttons or checkboxes
+- Add todo priority/category selection with `<select>`
+
+**Learning Goals:**
+
+- Master form handling in Svelte
+- Learn validation patterns with runes
+- Understand when to use different binding directives
+- Practice user feedback and error handling
+
+---
+
+## **Task 9: Local Storage Persistence**
+
+**Svelte Concepts: `$effect()` with async, Side effects, Lifecycle**
+
+Persist todos across browser sessions.
+
+**Requirements:**
+
+- Use `$effect()` to save todos to localStorage whenever they change
+- Load todos from localStorage on component mount
+- Handle edge cases (invalid JSON, quota exceeded)
+- Add a debounce to prevent excessive localStorage writes
+- Implement an "Export" feature (download as JSON)
+- Implement an "Import" feature (upload JSON file)
+
+**Learning Goals:**
+
+- Understand `$effect()` for side effects and synchronization
+- Learn to handle async operations in effects
+- Practice data serialization and deserialization
+- See component lifecycle in Svelte 5's runes paradigm
+
+---
+
+## **Task 10: Animations & Advanced Transitions**
+
+**Svelte Concepts: `transition:`, `animate:`, Motion, Tweened values**
+
+Polish the UI with smooth animations.
+
+**Requirements:**
+
+- Use `animate:flip` for smooth list reordering
+- Add drag-and-drop reordering for todos
+- Implement custom transition functions for specific effects
+- Use `tweened` or `spring` stores for animated counters
+- Add a progress bar that animates completion percentage
+- Implement crossfade transition when moving todos between filters
+
+**Learning Goals:**
+
+- Master Svelte's animation system
+- Learn FLIP animations with `animate:flip`
+- Understand motion stores (`tweened`, `spring`)
+- Create polished, professional UI transitions
+
+---
+
+## **Task 11: Context API & Dependency Injection**
+
+**Svelte Concepts: `setContext()`, `getContext()`, Component trees**
+
+Implement theme switching and cross-component communication.
+
+**Requirements:**
+
+- Create a theme context (light/dark mode)
+- Use `setContext()` in a root component
+- Use `getContext()` in nested components to access theme
+- Implement theme toggle that affects all components
+- Create a "settings" context for user preferences
+- Add preference for animation speed using context
+- Apply theme classes conditionally throughout the app
+
+**Learning Goals:**
+
+- Understand context API for dependency injection
+- Learn when to use context vs. stores
+- Practice provider/consumer patterns
+- Avoid prop drilling with context
+
+---
+
+## **Task 12: Component Events & `$bindable`**
+
+**Svelte Concepts: `$bindable()`, Event dispatching, Two-way binding with components**
+
+Create advanced component communication patterns.
+
+**Requirements:**
+
+- Use `$bindable()` in TodoInput for two-way binding with parent
+- Create a `SearchBar.svelte` with bindable search query
+- Implement a `Pagination.svelte` with bindable current page
+- Create custom event handlers for todo actions
+- Add a `MultiSelect.svelte` for bulk todo operations
+- Implement "Select All" and "Clear Selection" using `$bindable()`
+
+**Learning Goals:**
+
+- Master `$bindable()` for two-way component binding
+- Understand the difference between `$props()` and `$bindable()`
+- Learn when to use bindable vs. callbacks
+- Practice creating flexible component APIs
+
+---
+
+## **Task 13: Performance Optimization**
+
+**Svelte Concepts: `$derived.by()`, Memoization, Lazy evaluation**
+
+Optimize the app for better performance.
+
+**Requirements:**
+
+- Use `$derived.by()` for expensive computed values
+- Implement virtual scrolling for large todo lists (100+ items)
+- Add memoization to prevent unnecessary recalculations
+- Use `$effect.pre()` to batch DOM updates
+- Implement lazy loading for todo details
+- Profile the app and identify performance bottlenecks
+- Add a "Generate 1000 todos" button to test performance
+
+**Learning Goals:**
+
+- Understand when and why to use `$derived.by()`
+- Learn performance optimization techniques
+- See the difference between `$effect()` and `$effect.pre()`
+- Practice performance profiling
+
+---
+
+## **Task 14: Error Boundaries & Loading States**
+
+**Svelte Concepts: Error handling, `{#await}`, Async patterns**
+
+Add robust error handling and async state management.
+
+**Requirements:**
+
+- Implement an error boundary component pattern
+- Add loading states for async operations (simulated API calls)
+- Use `{#await}` blocks for promise handling
+- Create a toast/notification system for errors
+- Handle network failures gracefully
+- Implement retry logic for failed operations
+- Add a global error handler
+
+**Learning Goals:**
+
+- Learn error handling patterns in Svelte
+- Master async data handling with `{#await}`
+- Understand loading and error states
+- Practice defensive programming
+
+---
+
+## **Task 15: Testing & Final Polish**
+
+**Svelte Concepts: Component testing, Integration, Accessibility**
+
+Write tests and ensure accessibility.
+
+**Requirements:**
+
+- Set up Vitest or Jest for component testing
+- Write unit tests for store functions
+- Write component tests for TodoItem, TodoInput
+- Add integration tests for the full user flow
+- Implement ARIA labels and roles throughout
+- Test keyboard navigation (Tab, Enter, Escape, Arrow keys)
+- Add focus management for modal and forms
+- Run accessibility audit and fix issues
+- Add README with feature documentation
+
+**Learning Goals:**
+
+- Learn to test Svelte 5 components
+- Understand accessibility best practices
+- Practice TDD or test-after development
+- Complete the full development cycle
+
+---
+
+## Bonus Challenges (Optional Advanced Exploration)
+
+**Task 16: Server-Side Rendering (SvelteKit)**
+
+- Convert to SvelteKit project
+- Implement server-side data loading
+- Add API routes for todos
+- Deploy to Vercel/Netlify
+
+**Task 17: Advanced Patterns**
+
+- Implement undo/redo functionality
+- Add keyboard shortcuts system
+- Create a command palette (Cmd+K)
+- Implement todo templates and recurring tasks
+
+---
+
+Each task builds on the previous ones while introducing new Svelte 5 concepts. Complete them in order for the best learning experience! Good luck! 🚀
