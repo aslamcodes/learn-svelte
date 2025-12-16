@@ -1,43 +1,59 @@
 <script lang="ts">
-    type Todo = {
-        id: number;
-        description: string;
-        done: boolean;
-    };
+    import TodoItem from "./TodoItem.svelte";
+    import type { Todo } from "../types";
 
-    let todoList: Todo[] = $state<Todo[]>([
-        {
-            id: 1,
-            description: "hello",
-            done: true,
-        },
-    ]);
+    let currTodo = $state("");
+    let todoList = $state<Todo[]>([]);
 
     // when used without derived, the todolist.length will not point to the reactive proxy,
     // hence any updates to the proxies via the AddTodo function will not update this variable
-    let todoCount: number = $derived(todoList.length);
+    const todoCount = $derived.by(() => {
+        const completed = todoList.filter((t) => t.done).length;
+        return {
+            completed,
+            pending: todoList.length - completed,
+        };
+    });
 
-    function AddTodo(todoText: string) {
+    function addTodo() {
         let todo: Todo = {
-            id: 1,
-            description: todoText,
+            id: crypto.randomUUID(),
+            description: currTodo,
             done: false,
         };
 
         todoList.push(todo);
+
+        currTodo = "";
     }
+
+    function DeleteTodo(id: string) {
+        todoList = todoList.filter((todo) => todo.id != id);
+    }
+
+    function ToggleItem(id: string) {
+        let item = todoList.findIndex((todo) => todo.id === id);
+
+        if (item == -1) {
+            return;
+        }
+
+        todoList[item].done = !todoList[item].done;
+    }
+
+    $inspect(todoList).with(console.log);
 </script>
 
 <div>
-    {#each todoList as todo}
-        <div class="todo">
-            [{#if todo.done}
-                x
-            {/if}]
-            {todo.description}
-        </div>
-    {/each}
-    Total items {todoCount}
+    <input
+        bind:value={currTodo}
+        onkeydown={(e) => e.key == "Enter" && addTodo()}
+    />
+    <button onclick={addTodo}>Add Todo</button>
 
-    <button onclick={() => AddTodo("demo")}>Add Todo</button>
+    {#each todoList as todo}
+        <TodoItem {todo} {DeleteTodo} {ToggleItem} />
+    {/each}
+
+    pending items {todoCount.pending}
 </div>
