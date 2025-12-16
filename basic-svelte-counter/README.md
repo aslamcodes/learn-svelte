@@ -15,9 +15,8 @@ Runes are identical to special functions from React (useStage, useEffect), but R
 `$derived` rune is used to perform arbitrary expressions when its dependencies are changes. ie the derived operation is marked dirty when one of the dependencies is changed.
 `$derived.By` lets you pass a function that performs complex operation when your dependencies changes
 
-# Bindable
-
-- This is a relatively new concept from svelte, as in React, when you wanted to life state up, you would pass a setter funciton to your child. Svelte think that's a lot of code and have this two way `bind` feature
+# Bind and Bindable
+- This is a relatively new concept for me from svelte, as in React, when you wanted to life state up, you would pass a setter funciton to your child. Svelte think that's a lot of code and have this two way `bind` feature
 
 Here's a simple example.
 
@@ -47,3 +46,39 @@ Here's a simple example.
 ```
 
 So svelte's bind works behind the scenses during compile time, to produce the code I've often repeat myself and does it perfectly everytime.
+
+# $Bindable rune
+In svelte4, you can say `export let count` and when you do `count++` in the child component, the write go up to the parent. For example  
+
+```svelte
+<script>
+  export let count;
+</script>
+
+<button on:click={() => count++}>
+  +
+</button>
+```
+and in the parent  
+
+```svelte
+<script>
+  let count = 0;
+</script>
+
+<Child bind:count />
+
+<p>{count}</p>
+```
+
+This way, when I look at it, without the parent in picture, looks confusing as count is not initilised anywhere, so developer has to assume it, when understanding. But svelte5 made it explicit, and its better to read this way
+
+```svelte
+<script>
+  let count = $bindable();
+</script>
+
+<button on:click={() => count++}>
+  +
+</button>
+````
