@@ -12,7 +12,7 @@
 
 <div class="todo">
     <!-- Since todo is an object from a proxy object, binding todo here reflects to object proxy defined in the Todolist component -->
-    <input type="checkbox" onchange={() => ToggleItem(todo.id)} />
+    <input type="checkbox" checked={todo.done} onchange={() => ToggleItem(todo.id)} />
     {todo.description}
     <button onclick={() => DeleteTodo(todo.id)}>delete</button>
 </div>

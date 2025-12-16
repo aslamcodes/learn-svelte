@@ -19,5 +19,8 @@
 </script>
 
 <div>
-    Completed so far {todoCount.completed}, only {todoCount.pending} yet to be done
+    {#if todoList.length != 0}
+        Completed so far {todoCount.completed}, only {todoCount.pending} yet to be
+        done
+    {/if}
 </div>
