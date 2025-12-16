@@ -28,6 +28,10 @@ Create a basic todo app foundation with reactive state management.
 - See how Svelte 5's fine-grained reactivity works
 - Learn `$derived()` for computed values
 
+# Task completion
+- This task is completed at [afd972f](https://github.com/aslamcodes/learn-svelte/commit/afd972fddc01c1492183e0871d94ef6ca24fadd9)
+- Learnt that, when counting the total count of the todolist array without the $derived rune will not get the underlying proxy's count.
+
 ---
 
 ## **Task 2: Event Handling & Two-Way Binding**
