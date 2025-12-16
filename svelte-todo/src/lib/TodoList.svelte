@@ -1,6 +1,8 @@
 <script lang="ts">
-    import TodoItem from "./TodoItem.svelte";
     import type { Todo } from "../types";
+    import TodoItem from "./TodoItem.svelte";
+    import TodoInput from "./TodoInput.svelte";
+    import Stats from "./Stats.svelte";
 
     let currTodo = $state("");
     let todoList = $state<Todo[]>([]);
@@ -45,15 +47,11 @@
 </script>
 
 <div>
-    <input
-        bind:value={currTodo}
-        onkeydown={(e) => e.key == "Enter" && addTodo()}
-    />
-    <button onclick={addTodo}>Add Todo</button>
+    <TodoInput bind:value={currTodo} {addTodo} />
 
     {#each todoList as todo}
         <TodoItem {todo} {DeleteTodo} {ToggleItem} />
     {/each}
 
-    pending items {todoCount.pending}
+    <Stats completed={todoCount.completed} pending={todoCount.pending} />
 </div>
