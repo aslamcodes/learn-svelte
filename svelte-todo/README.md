@@ -28,7 +28,8 @@ Create a basic todo app foundation with reactive state management.
 - See how Svelte 5's fine-grained reactivity works
 - Learn `$derived()` for computed values
 
-# Task completion
+**Task completion:**
+
 - This task is completed at [afd972f](https://github.com/aslamcodes/learn-svelte/commit/afd972fddc01c1492183e0871d94ef6ca24fadd9)
 - Learnt that, when counting the total count of the todolist array without the $derived rune will not get the underlying proxy's count.
 
@@ -56,6 +57,14 @@ Enhance interactivity with proper event handling and effects.
 - Understand event modifiers (e.g., `on:click`, `on:keydown`)
 - Learn when and how to use `$effect()` for side effects
 - See the difference between `$derived()` (pure computation) and `$effect()` (side effects)
+
+**Task completion:**
+
+- The task is complted at [965d723](https://github.com/aslamcodes/learn-svelte/commit/965d723dcba505b4a5948eb5562a6570dd40a9d2)
+- The idea is, $props are read-only in svelte, even though prop is reactive, svelte discourages mutating prop in child components, and its spits out a warning when doing so. well in that case you have to explicitly mark a prop as $bindable, but that makes it even more complicated, for this TodoItem and TodoList case
+- Rule of thump
+  Bind = "This child controls this piece of state"
+  Callbacks = "This child requests a state change"
 
 ---
 
