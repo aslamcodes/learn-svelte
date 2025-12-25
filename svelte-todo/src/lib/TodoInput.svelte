@@ -1,11 +1,11 @@
 <script lang="ts">
     interface Props {
-        value: string;
-        addTodo: () => void;
+        addTodo: (curr: string) => void;
     }
+    let { addTodo }: Props = $props();
 
-    let { value = $bindable(), addTodo }: Props = $props();
+    let curr = $state("");
 </script>
 
-<input bind:value onkeydown={(e) => e.key === "Enter" && addTodo()} />
-<button onclick={addTodo}>Add</button>
+<input bind:value={curr} onkeydown={(e) => e.key === "Enter" && addTodo(curr)} />
+<button onclick={() => addTodo(curr)}>Add</button>

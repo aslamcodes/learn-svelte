@@ -3,11 +3,11 @@
 
     interface Props {
         todo: Todo;
-        DeleteTodo: (id: string) => void;
-        ToggleItem: (id: string) => void;
+        deleteTodo: (id: string) => void;
+        toggleItem: (id: string) => void;
     }
 
-    let { todo, DeleteTodo, ToggleItem }: Props = $props();
+    let { todo, deleteTodo: DeleteTodo, toggleItem: ToggleItem }: Props = $props();
 </script>
 
 <div class="todo">

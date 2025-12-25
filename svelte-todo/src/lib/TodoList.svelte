@@ -4,11 +4,15 @@
     import TodoInput from "./TodoInput.svelte";
     import Stats from "./Stats.svelte";
     import { slide } from "svelte/transition";
-
-    let currTodo = $state("");
-    let todoList = $state<Todo[]>([]);
+    import {
+        todoState as todoList,
+        deleteTodo,
+        addTodo,
+        toggleItem,
+    } from "./todoStore.svelte";
 
     let filter = $state<"all" | "active" | "completed">("all");
+    let currTodo = $state("");
 
     const filteredTodos = $derived.by(() => {
         switch (filter) {
@@ -21,32 +25,6 @@
         }
     });
 
-    function addTodo() {
-        let todo: Todo = {
-            id: crypto.randomUUID(),
-            description: currTodo,
-            done: false,
-        };
-
-        todoList.push(todo);
-
-        currTodo = "";
-    }
-
-    function DeleteTodo(id: string) {
-        todoList = todoList.filter((todo) => todo.id != id);
-    }
-
-    function ToggleItem(id: string) {
-        let item = todoList.findIndex((todo) => todo.id === id);
-
-        if (item == -1) {
-            return;
-        }
-
-        todoList[item].done = !todoList[item].done;
-    }
-
     $inspect(todoList).with(console.log);
 </script>
 
@@ -56,12 +34,12 @@
     <button onclick={() => (filter = "completed")}>Completed</button>
     <br />
 
-    <TodoInput bind:value={currTodo} {addTodo} />
+    <TodoInput {addTodo} />
 
     {#key filter}
         {#each filteredTodos as todo (todo.id)}
             <div transition:slide>
-                <TodoItem {todo} {DeleteTodo} {ToggleItem} />
+                <TodoItem {todo} {deleteTodo} {toggleItem} />
             </div>
         {/each}
     {/key}
