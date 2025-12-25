@@ -149,6 +149,12 @@ Implement global state management using Svelte 5 patterns.
 - Compare with legacy stores (`writable`, `readable`)
 - Practice state management patterns
 
+**Task completion**
+- The task is completed at [99da9bb](https://github.com/aslamcodes/learn-svelte/commit/99da9bb) commit
+- Instead of using the svelte's store implementation from 'svelte/store' module, svelte5 recommends using the universal $state rune.
+- By leveraging $state rune, most of the use cases of store gets diminished, but not reduncdant. `svelte/store` can be used for advanced and complext async jobs, and you want heavy control over the store
+- However when I exported the state, the svelte-compiler didn't let me mutate the state variable, for state guarantee reasons since multiple importers can mutate the state and update order
+
 ---
 
 ## **Task 6: Snippets & Content Projection**
